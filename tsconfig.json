@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "outDir": "./dist",
+    "strict": true,
+    "module": "NodeNext",
+    "moduleResolution": "nodenext"
+  },
+  "include": [
+    "websocket/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
