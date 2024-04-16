@@ -1,5 +1,9 @@
-import handleUserEvents from './userEvents'
+import WebSocket from 'ws';
+import handleUserEvents from './userEvents';
+import handleNpcEvents from './npcEvents';
 
-export const wsEventHandlers = {
-  handleUserEvents,
+export default function handleAllEvents(socket: WebSocket) {
+  handleUserEvents(socket);
+  // handleNpcEvents(socket);
+  // Add more event handlers as needed...
 }
