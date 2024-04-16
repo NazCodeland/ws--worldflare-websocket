@@ -8,15 +8,19 @@ declare global {
     }
 
     interface Message {
-      origin?: string,
+      origin: string,
       reason: string,
-      id: number,
-      payload?: {
-        scope?: string,
+      wsConnId: number,
+      type: string,
+      scope: string,
+      payload: {
         data: {
           coordinates: App.Coordinates
         }
       }
     }
+
+    type SerializedMessage = (number | string | { data: { coordinates: App.Coordinates } })[];
+
   }
 }

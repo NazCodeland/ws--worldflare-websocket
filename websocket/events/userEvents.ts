@@ -1,5 +1,5 @@
 import { WebSocket } from 'ws';
-import createMessage from '../message.js';
+import createMessage from '../createMessage.js';
 import { ws } from '../websocket.js'
 // a map of all the "clients" connected to the WebSocket Server.
 // the 'key' value represents the socket connection and the 'value' represents the unique ID
