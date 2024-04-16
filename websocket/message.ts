@@ -1,6 +1,6 @@
 // 
 
-export default function createNewMessage({ origin, reason, id, payload }: App.Message =
+export default function createMessage({ origin, reason, id, payload }: App.Message =
   { origin: 'websocket', reason: '', id: 0, payload: { scope: '', data: { coordinates: { lat: 0, lng: 0 } } } }) {
 
   return JSON.stringify({

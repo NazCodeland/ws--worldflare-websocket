@@ -1,7 +1,7 @@
 {
-  "name": "worldflare-websocket",
+  "name": "worldflare-websocket--ws",
   "version": "0.1.0",
-  "description": "A simple WebSocket websocket-side implementation using the 'ws' library.",
+  "description": "A simple WebSocket implementation using the 'ws' library.",
   "main": "websocket/websocket.js",
   "scripts": {
     "compile": "tsc --outDir dist",
@@ -15,7 +15,7 @@
     "node": "14.x"
   },
   "repository": {
-    "url": "https://glitch.com/edit/#!/glitch-hello-node"
+    "url": "https://glitch.com/edit/#!/ws--worldflare-websocket"
   },
   "license": "MIT",
   "keywords": [
