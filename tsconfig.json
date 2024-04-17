@@ -7,8 +7,7 @@
     "moduleResolution": "nodenext"
   },
   "include": [
-    "websocket/**/*.ts",
-    "websocket/messageSchema.ts"
+    "websocket/**/*.ts"
   ],
   "exclude": [
     "node_modules"

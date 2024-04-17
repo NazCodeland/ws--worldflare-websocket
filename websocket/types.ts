@@ -1,26 +1,50 @@
 // 
+export namespace App {
+  export enum Origin {
+    Websocket, // 0
+    Client // 1
+  }
 
-declare global {
-  namespace App {
-    interface Coordinates {
-      lat: number;
-      lng: number;
+  export enum Reason {
+    UserConnected,
+    UserDisconnected,
+    UserGeolocation
+  }
+
+  export enum Type {
+    Npc,
+    User,
+  }
+
+  export enum Scope {
+    Area,
+    City,
+    Continent,
+    Country,
+    Global,
+    Province,
+    Town,
+  }
+
+  export interface Coordinates {
+    lat: number;
+    lng: number;
+  }
+
+  export interface Payload {
+    data: {
+      coordinates: App.Coordinates
     }
+  }
 
-    interface Message {
-      origin: string,
-      reason: string,
-      wsConnId: number,
-      type: string,
-      scope: string,
-      payload: {
-        data: {
-          coordinates: App.Coordinates
-        }
-      }
-    }
-
-    type SerializedMessage = (number | string | { data: { coordinates: App.Coordinates } })[];
-
+  export interface Message {
+    origin: Origin;
+    reason: Reason;
+    wsConnId: number;
+    type: Type;
+    scope: Scope;
+    payload: App.Payload
   }
 }
+
+
