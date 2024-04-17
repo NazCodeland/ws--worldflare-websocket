@@ -5,14 +5,12 @@
   "main": "websocket/websocket.js",
   "scripts": {
     "compile": "tsc --outDir dist",
-    "start": "npm run compile && node dist/websocket.js"
+    "dev": "tsx watch websocket/websocket.ts"
   },
   "dependencies": {
+    "tsx": "^4.7.2",
     "typescript": "^5.4.5",
     "ws": "^8.16.0"
-  },
-  "engines": {
-    "node": "14.x"
   },
   "repository": {
     "url": "https://glitch.com/edit/#!/ws--worldflare-websocket"
@@ -23,6 +21,10 @@
     "glitch"
   ],
   "devDependencies": {
-    "@types/ws": "^8.5.10"
+    "@types/ws": "^8.5.10",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
   }
 }
