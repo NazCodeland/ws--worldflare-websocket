@@ -1,21 +1,34 @@
 import { WebSocket } from 'ws';
 import createMessage from '../createMessage.js';
 import { ws } from '../websocket.js'
+import { App } from '../types.js';
 // a map of all the "clients" connected to the WebSocket Server.
 // the 'key' value represents the socket connection and the 'value' represents the unique ID
 const clients = new Map();
 let uniqueId = 1;
 
 
+
 export default function handleUserEvents(socket: WebSocket): void {
-  // add connection to `clients` map object
+
+  // add the current connection to 'clients' map object
   clients.set(socket, uniqueId)
-  console.log("WITHIN SOCKET CODE")
+
   // STEP 0
   //   ---------------------------------------------------------------------------
   // send back existing uniqueId for connection else, a new uniqueId
-  const userConnectedMessage = createMessage({ reason: "user-connected", id: uniqueId })
-  console.log("Websocket: sending 'user-connected' message", userConnectedMessage)
+  console.log('------------------------------2222--------------------------------')
+  const userConnectedMessage = createMessage(
+    {
+      origin: App.Origin.Websocket,
+      reason: App.Reason.UserConnected,
+      wsConnId: uniqueId,
+      type: App.Type.User,
+      scope: App.Scope.Global,
+      payload: { data: { coordinates: { lat: 0, lng: 0 } } }
+    })
+
+  console.log('--------------------------------------------------------------')
   socket.send(userConnectedMessage);
   uniqueId++;
 
@@ -25,7 +38,15 @@ export default function handleUserEvents(socket: WebSocket): void {
   socket.on('close', function close() {
     clients.delete(socket)
 
-    const userDisconnectedMessage = createMessage({ reason: "user-disconnected", id: clients.get(socket) })
+    const userDisconnectedMessage = createMessage({
+      origin: App.Origin.Websocket,
+      reason: App.Reason.UserDisconnected,
+      wsConnId: clients.get(socket),
+      type: App.Type.User,
+      scope: App.Scope.Global,
+      payload: { data: { coordinates: { lat: 0, lng: 0 } } }
+    })
+
     console.log("Websocket: user disconnected")
     if (clients.size) { console.log("sending message (id),", userDisconnectedMessage) }
     // broadcast 'userDisconnectedMessage' for the disconnected connection 
@@ -42,17 +63,21 @@ export default function handleUserEvents(socket: WebSocket): void {
 
     // create geolocationMessage  and broadcast to all connected clients except current sender  
     const geolocationMessage = createMessage({
-      reason: "user-geolocation",
-      id: clients.get(socket) ?? uniqueId,
+      origin: App.Origin.Websocket,
+      reason: App.Reason.UserGeolocation,
+      wsConnId: clients.get(socket) ?? uniqueId,
+      type: App.Type.User,
+      scope: App.Scope.Global,
       payload: { data: { coordinates: message.payload.data.coordinates } },
     })
     //  // 'ws.clients' is an array of active websocket connections
+
     ws.clients.forEach(client => {
       // 'socket' represents the current websocket connection
       // 'client' represents a unique websocket connection
       if (socket != client) {
         console.log("Websocket: Sending geolocation to each client", geolocationMessage)
-        client.send(JSON.stringify(geolocationMessage));
+        client.send(geolocationMessage);
 
       }
       else { console.log("") }

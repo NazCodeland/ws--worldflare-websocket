@@ -1,4 +1,4 @@
-
+// 
 import { WebSocketServer } from "ws";
 import handleAllEvents from "./events";
 console.log("WEBSOCKET CONNECTION SUCCESSFUL")
