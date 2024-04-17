@@ -5,10 +5,9 @@
   "main": "websocket/websocket.js",
   "scripts": {
     "compile": "tsc --outDir dist",
-    "dev": "tsx watch websocket/websocket.ts"
+    "dev": "bun --watch websocket/websocket.ts"
   },
   "dependencies": {
-    "tsx": "^4.7.2",
     "typescript": "^5.4.5",
     "ws": "^8.16.0"
   },

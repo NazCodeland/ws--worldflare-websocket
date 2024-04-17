@@ -28,7 +28,7 @@ export default function handleUserEvents(socket: WebSocket): void {
       payload: { data: { coordinates: { lat: 0, lng: 0 } } }
     })
 
-  console.log('--------------------------------------------------------------')
+  console.log('-----------------sending back message------------------------------')
   socket.send(userConnectedMessage);
   uniqueId++;
 

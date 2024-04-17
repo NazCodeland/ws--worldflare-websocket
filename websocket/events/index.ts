@@ -1,4 +1,4 @@
-import WebSocket from 'ws';
+import { WebSocket } from 'ws';
 import handleUserEvents from './userEvents';
 import handleNpcEvents from './npcEvents';
 

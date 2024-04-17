@@ -1,5 +1,4 @@
 // 
-import createMessage from "./createMessage";
 import { App } from "./types";
 
 class Uint8ArrayWriter {
