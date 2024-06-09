@@ -8,6 +8,7 @@
     "dev": "bun --watch websocket/websocket.ts"
   },
   "dependencies": {
+    "@worldflare/shared": "^1.0.2",
     "typescript": "^5.4.5",
     "ws": "^8.16.0"
   },
