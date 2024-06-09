@@ -1,31 +1,31 @@
 {
-	"name": "worldflare-websocket--ws",
-	"version": "0.1.0",
-	"description": "A simple WebSocket server implementation using the 'ws' library.",
-	"main": "websocket/websocket.js",
-	"scripts": {
-		"compile": "tsc --outDir dist",
-		"dev": "bun --watch websocket/websocket.ts",
-		"format": "prettier --write ."
-	},
-	"dependencies": {
-		"prettier": "^3.3.1",
-		"typescript": "^5.4.5",
-		"ws": "^8.16.0"
-	},
-	"repository": {
-		"url": "https://glitch.com/edit/#!/ws--worldflare-websocket"
-	},
-	"license": "MIT",
-	"keywords": [
-		"node",
-		"glitch"
-	],
-	"devDependencies": {
-		"@types/ws": "^8.5.10",
-		"@types/bun": "latest"
-	},
-	"peerDependencies": {
-		"typescript": "^5.0.0"
-	}
+  "name": "worldflare-websocket--ws",
+  "version": "0.1.0",
+  "description": "A simple WebSocket server implementation using the 'ws' library.",
+  "main": "websocket/websocket.js",
+  "scripts": {
+    "compile": "tsc --outDir dist",
+    "dev": "bun --watch websocket/websocket.ts",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "prettier": "^3.3.1",
+    "typescript": "^5.4.5",
+    "ws": "^8.16.0"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/ws--worldflare-websocket"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch"
+  ],
+  "devDependencies": {
+    "@types/ws": "^8.5.10",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
 }
