@@ -1,13 +1,29 @@
 {
-  "compilerOptions": {
-    "target": "ES6",
-    "outDir": "./dist",
-    "strict": true,
-  },
-  "include": [
-    "websocket/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+	"compilerOptions": {
+		// Enable latest features
+		"lib": ["ESNext"],
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleDetection": "force",
+
+		// Bundler mode
+		"moduleResolution": "Bundler",
+		"verbatimModuleSyntax": true,
+
+		// Best practices
+		"strict": true,
+		"skipLibCheck": true,
+		"noFallthroughCasesInSwitch": true,
+
+		"allowJs": true,
+		"checkJs": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"resolveJsonModule": true,
+		"sourceMap": true,
+
+		"outDir": "./dist"
+	},
+	"include": ["websocket/**/*.ts"],
+	"exclude": ["node_modules"]
 }

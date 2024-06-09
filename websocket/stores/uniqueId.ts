@@ -1,8 +1,7 @@
-// 
+//
 
-import { Store } from "./singleStoreGeneric"
+import { Store } from './singleStoreGeneric';
 
 let uniqueId = 1;
 
-
-export const uniqueIdStore = new Store(uniqueId)
+export const uniqueIdStore = new Store(uniqueId);
