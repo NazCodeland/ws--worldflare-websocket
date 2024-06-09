@@ -1,7 +1,7 @@
 import { WebSocket } from 'ws';
 import { encode } from './lib/worldflare-shared/codec.js';
 import type { Worldflare } from './lib/worldflare-shared/types.js';
-import { ws } from './websocket';
+import { ws } from './websocket.js';
 
 export function send(message: Worldflare.App.Message, client: WebSocket) {
 	try {
