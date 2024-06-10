@@ -1,11 +1,11 @@
 import { WebSocket } from 'ws';
 
-import { broadcast, send } from '../wsUtilities.js';
+import { broadcast, send } from '$src/wsUtilities';
 
-import { clients } from '../clients.js';
-import { decode } from '../lib/worldflare-shared/codec.js';
-import { createMessage } from '../lib/worldflare-shared/createMessage.js';
-import { Worldflare } from '../lib/worldflare-shared/types.js';
+import { clients } from '$src/clients';
+import { decode } from '$src/lib/worldflare-shared/codec';
+import { createMessage } from '$src/lib/worldflare-shared/createMessage';
+import { Worldflare } from '$src/lib/worldflare-shared/types';
 // a map of all the "clients" connected to the WebSocket Server.
 // the 'key' value represents the socket connection and the 'value' represents the unique ID
 

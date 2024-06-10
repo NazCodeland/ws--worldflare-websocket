@@ -1,28 +1,38 @@
 {
   "compilerOptions": {
     // Enable latest features
+    "lib": [
+      "ESNext"
+    ],
     "target": "ESNext",
     "module": "ESNext",
     "moduleDetection": "force",
-
     // Bundler mode
     "moduleResolution": "Bundler",
     "verbatimModuleSyntax": true,
-
     // Best practices
     "strict": true,
     "skipLibCheck": true,
     "noFallthroughCasesInSwitch": true,
-
     "allowJs": true,
     "checkJs": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "sourceMap": true,
-
-    "outDir": "./dist"
+    "outDir": "./dist",
+    // Path aliases
+    "baseUrl": ".",
+    "paths": {
+      "$src/*": [
+        "src/*"
+      ]
+    }
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

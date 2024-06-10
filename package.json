@@ -5,7 +5,8 @@
   "main": "websocket/websocket.js",
   "scripts": {
     "compile": "tsc --outDir dist",
-    "dev": "bun --watch websocket/websocket.ts",
+    "dev": "bun --watch src/websocket.ts",
+    "lint": "prettier --check . && eslint .",
     "format": "prettier --write ."
   },
   "dependencies": {
@@ -22,8 +23,12 @@
     "glitch"
   ],
   "devDependencies": {
+    "@types/bun": "latest",
     "@types/ws": "^8.5.10",
-    "@types/bun": "latest"
+    "@typescript-eslint/eslint-plugin": "^7.13.0",
+    "@typescript-eslint/parser": "^7.13.0",
+    "eslint": "^9.4.0",
+    "eslint-config-prettier": "^9.1.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
