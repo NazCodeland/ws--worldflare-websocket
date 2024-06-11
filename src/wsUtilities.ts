@@ -11,7 +11,7 @@ export function send(message: Worldflare.App.Message, client: WebSocket) {
   }
 }
 
-export function broadcast(message: Worldflare.App.Message, connection: WebSocket) {
+export function broadcast(message: Worldflare.App.Message) {
   ws.clients.forEach((client) => {
     if (client.readyState === WebSocket.OPEN) {
       send(message, client);
