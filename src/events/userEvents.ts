@@ -4,7 +4,7 @@ import { Worldflare } from '$src/lib/worldflare-shared/types';
 export default function handleUserEvents(message: Worldflare.App.Message): void {
   // create geolocationMessage  and broadcast to all connected connectedUsers except current sender
   if (message.reason === Worldflare.App.Reason.UserGeolocation) {
-    console.log("websocket: geolocation received from client")
+    console.log('websocket: geolocation received from client');
     console.log(`----------------------------------------------------`);
     console.log('msg', JSON.stringify(message));
     console.log(`----------------------------------------------------`);
@@ -12,7 +12,7 @@ export default function handleUserEvents(message: Worldflare.App.Message): void 
     message.origin = Worldflare.App.Origin.Websocket;
 
     broadcast(message);
-    console.log("websocket: geolocation broadcasted to everyone but the sender")
+    console.log('websocket: geolocation broadcasted to everyone but the sender');
   }
 }
 // })

@@ -6,7 +6,7 @@ import { broadcast, send } from './wsUtilities';
 export let uniqueId = 1;
 
 export default function handleWebSocketConnection(socket: WebSocket): void {
-  console.log("")
+  console.log('');
   // STEP 0
   // add the current connection to 'connectedUsers' map object
   connectedUsers.set(socket, uniqueId);
@@ -21,7 +21,7 @@ export default function handleWebSocketConnection(socket: WebSocket): void {
     payload: { data: { coordinates: { lat: 0, lng: 0 } } },
   });
   send(message, socket);
-  console.log("websocket: uniqueId sent to client")
+  console.log('websocket: uniqueId sent to client');
   uniqueId++;
 
   socket.on('close', () => {

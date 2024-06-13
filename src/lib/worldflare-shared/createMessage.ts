@@ -10,8 +10,8 @@ export function createMessage(
     wsConnId: 0,
     type: Worldflare.App.Type.User,
     scope: Worldflare.App.Scope.Global,
-    payload: { data: { coordinates: { lat: 0, lng: 0 } } }
-  }
+    payload: { data: { coordinates: { lat: 0, lng: 0 } } },
+  },
 ) {
   const message: Worldflare.App.Message = {
     origin: origin,
@@ -19,7 +19,7 @@ export function createMessage(
     wsConnId: wsConnId,
     type: type,
     scope: scope,
-    payload: payload
+    payload: payload,
   };
 
   return message;
