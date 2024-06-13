@@ -6,10 +6,6 @@ export default function handleAllEvents(socket: WebSocket) {
   socket.on('message', function (rawMessage: ArrayBufferLike) {
     const decodedMessage = decode(new Uint8Array(rawMessage));
 
-    console.log(`----------------------------------------------------`);
-    console.log('msg', JSON.stringify(decodedMessage));
-    console.log(`----------------------------------------------------`);
-
     switch (decodedMessage.type) {
       case 2: // user
         handleUserEvents(decodedMessage);

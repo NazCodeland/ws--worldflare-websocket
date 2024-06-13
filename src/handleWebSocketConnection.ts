@@ -6,6 +6,7 @@ import { broadcast, send } from './wsUtilities';
 export let uniqueId = 1;
 
 export default function handleWebSocketConnection(socket: WebSocket): void {
+  console.log("")
   // STEP 0
   // add the current connection to 'connectedUsers' map object
   connectedUsers.set(socket, uniqueId);
@@ -20,10 +21,11 @@ export default function handleWebSocketConnection(socket: WebSocket): void {
     payload: { data: { coordinates: { lat: 0, lng: 0 } } },
   });
   send(message, socket);
+  console.log("websocket: uniqueId sent to client")
   uniqueId++;
 
   socket.on('close', () => {
-    console.log('Websocket: user disconnected');
+    console.log('Websocket: client disconnected');
 
     // when a socket connection is "closed", broadcast the "ID"
     const message = createMessage({
@@ -36,9 +38,7 @@ export default function handleWebSocketConnection(socket: WebSocket): void {
     });
     broadcast(message);
 
-    console.log(connectedUsers);
     // remove the disconnected connection from 'connectedUsers' map object
     connectedUsers.delete(socket);
-    console.log(connectedUsers);
   });
 }

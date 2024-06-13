@@ -7,20 +7,20 @@ export namespace Worldflare {
       Unknown, // 0
       Reserved, // 1
       Websocket, // 2
-      Client, // 3
+      Client // 3
     }
     export enum Reason {
       Unknown,
       Reserved,
       UserConnected,
       UserDisconnected,
-      UserGeolocation,
+      UserGeolocation
     }
     export enum Type {
       Unknown,
       Reserved,
       User,
-      Npc,
+      Npc
     }
     export enum Scope {
       Unknown,
@@ -31,7 +31,7 @@ export namespace Worldflare {
       Province,
       City,
       Town,
-      Area,
+      Area
     }
 
     // In the `encode` function, we use the Float32 (32-bit floating point numbers) to store latitude and longitude values.
