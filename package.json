@@ -6,8 +6,8 @@
   "scripts": {
     "compile": "tsc --outDir dist",
     "dev": "bun --watch src/websocket.ts",
-    "lint": "prettier --check . && eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "lint": "prettier --check . && eslint ."
   },
   "dependencies": {
     "@types/eslint": "8.56.0",

@@ -1,17 +1,18 @@
 import { WebSocket } from 'ws';
 import handleUserEvents from './userEvents';
 import { decode } from '$src/lib/worldflare-shared/codec';
+import { Worldflare } from '$src/lib/worldflare-shared/types';
 
 export default function handleAllEvents(socket: WebSocket) {
   socket.on('message', function (rawMessage: ArrayBufferLike) {
     const decodedMessage = decode(new Uint8Array(rawMessage));
 
     switch (decodedMessage.type) {
-      case 2: // user
+      case Worldflare.App.Type.User: // user
         handleUserEvents(decodedMessage);
         break;
 
-      case 3: // npc
+      case Worldflare.App.Type.Npc: // npc
         // handleNpcEvents(socket);
         break;
 

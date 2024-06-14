@@ -10,7 +10,6 @@ export const ws = new WebSocketServer({ port: PORT });
 
 // -----------------------------------------------------
 ws.on('connection', (socket) => {
-  console.log('Websocket: Connected to client');
   handleWebSocketConnection(socket);
   handleAllEvents(socket);
 });

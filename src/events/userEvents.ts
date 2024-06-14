@@ -12,7 +12,6 @@ export default function handleUserEvents(message: Worldflare.App.Message): void 
     message.origin = Worldflare.App.Origin.Websocket;
 
     broadcast(message);
-    console.log('websocket: geolocation broadcasted to everyone but the sender');
   }
 }
 // })
