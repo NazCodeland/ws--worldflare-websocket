@@ -11,7 +11,7 @@ export default function handleUserEvents(message: Worldflare.App.Message): void 
 
     message.origin = Worldflare.App.Origin.Websocket;
 
-    broadcast(message);
+    broadcast(message, true);
   }
 }
 // })
