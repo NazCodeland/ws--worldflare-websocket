@@ -1,45 +1,48 @@
-import { connectedUsers } from './connectedUsers';
+import { ConnectionManager } from './lib/stores/connectionManager';
+import { messages } from './lib/stores/messages';
 import { createMessage } from './lib/worldflare-shared/createMessage';
 import { Worldflare } from './lib/worldflare-shared/types';
 import { broadcast, send } from './wsUtilities';
 
-export let uniqueId = 1;
+let uniqueUserId = 0;
 
 export default function handleWebSocketConnection(socket: WebSocket): void {
   console.log('Websocket: Connected to client');
   // STEP 0
-  // add the current connection to 'connectedUsers' map object
-  connectedUsers.set(socket, uniqueId);
+  ConnectionManager.addConnection(socket, uniqueUserId);
 
-  // send uniqueId back to the client
+  // send uniqueUserId back to the client
   const message = createMessage({
     origin: Worldflare.App.Origin.Websocket,
     reason: Worldflare.App.Reason.UserConnected,
-    wsConnId: uniqueId,
+    wsConnId: uniqueUserId,
     type: Worldflare.App.Type.User,
     scope: Worldflare.App.Scope.Global,
     payload: { data: { coordinates: { lat: 0, lng: 0 } } },
   });
   send(message, socket);
-  console.log('websocket: uniqueId sent to client');
+  console.log('websocket: uniqueUserId sent to client');
   console.log('');
-  uniqueId++;
+  uniqueUserId++;
 
   socket.on('close', () => {
     console.log('Websocket: client disconnected');
-
     // when a socket connection is "closed", broadcast the "ID"
+
     const message = createMessage({
       origin: Worldflare.App.Origin.Websocket,
       reason: Worldflare.App.Reason.UserDisconnected,
-      wsConnId: connectedUsers.get(socket),
+      wsConnId: ConnectionManager.getUniqueUserId(socket)!,
       type: Worldflare.App.Type.User,
       scope: Worldflare.App.Scope.Global,
       payload: { data: { coordinates: { lat: 0, lng: 0 } } },
     });
+
     broadcast(message);
 
-    // remove the disconnected connection from 'connectedUsers' map object
-    connectedUsers.delete(socket);
+    // remove the message associated with the disconnected connection
+    messages.delete(message.wsConnId);
+    // remove the disconnected connection
+    ConnectionManager.removeConnection(socket);
   });
 }
