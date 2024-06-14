@@ -2,10 +2,12 @@ import { WebSocket } from 'ws';
 import handleUserEvents from './userEvents';
 import { decode } from '$src/lib/worldflare-shared/codec';
 import { Worldflare } from '$src/lib/worldflare-shared/types';
+import { messages } from '$src/lib/stores/messages';
 
 export default function handleAllEvents(socket: WebSocket) {
   socket.on('message', function (rawMessage: ArrayBufferLike) {
     const decodedMessage = decode(new Uint8Array(rawMessage));
+    messages.set(decodedMessage.wsConnId, decodedMessage);
 
     switch (decodedMessage.type) {
       case Worldflare.App.Type.User: // user
