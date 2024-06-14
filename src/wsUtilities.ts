@@ -33,24 +33,17 @@ export function broadcast(message: Worldflare.App.Message, newConnection: boolea
   function sendExistingMessagesToNewUser() {
     messages.forEach((message, wsConnId) => {
       if (message.wsConnId !== wsConnId) {
-        const socket = ConnectionManager.getSocket(wsConnId);
-        console.log(
-          'sending stored message:',
-          message.wsConnId,
-          'to new client, wsConnId:',
-          wsConnId,
-        );
-        if (socket) {
-          send(message, socket);
-        } else {
-          console.log('socket not found for wsConnId:', wsConnId);
-        }
+        console.log('sending message to new client:', message.wsConnId, 'wsConnId', wsConnId);
+        const socket = ConnectionManager.getSocket(message.wsConnId);
+        socket !== undefined
+          ? send(message, socket)
+          : console.log('socket not found for wsConnId:', wsConnId);
       } else {
         console.log(
-          'skipping sending message to same user, message.wsConnId:',
-          message.wsConnId,
-          'wsConnId',
+          'skipping sending existing messages to new user: wsConnId:',
           wsConnId,
+          'wsConnId',
+          message.wsConnId,
         );
       }
     });
