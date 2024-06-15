@@ -6,7 +6,7 @@ export default function handleUserEvents(message: Worldflare.App.Message): void 
   if (message.reason === Worldflare.App.Reason.UserGeolocation) {
     console.log('websocket: geolocation received from client');
     console.log(`----------------------------------------------------`);
-    console.log('msg', JSON.stringify(message));
+    console.log('msg', message);
     console.log(`----------------------------------------------------`);
 
     broadcast(message, true);

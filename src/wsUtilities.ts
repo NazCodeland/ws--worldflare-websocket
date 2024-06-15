@@ -9,7 +9,7 @@ export function send(message: Worldflare.App.Message, socket: WebSocket) {
   try {
     socket.send(encode(message));
   } catch (error) {
-    console.log('Error in send function, wsUtilities.ts, a server file');
+    console.error('Error in send function, wsUtilities.ts, a server file');
   }
 }
 
