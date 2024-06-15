@@ -9,6 +9,7 @@ let uniqueUserId = 1;
 export default function handleWebSocketConnection(socket: WebSocket): void {
   console.log('Websocket: Connected to client');
   // STEP 0
+
   ConnectionManager.addConnection(socket, uniqueUserId);
 
   // send uniqueUserId back to the client
@@ -17,7 +18,7 @@ export default function handleWebSocketConnection(socket: WebSocket): void {
     reason: Worldflare.App.Reason.UserConnected,
     wsConnId: uniqueUserId,
     type: Worldflare.App.Type.User,
-    scope: Worldflare.App.Scope.Global,
+    scope: Worldflare.App.Scope.Unknown,
     payload: { data: { coordinates: { lat: 0, lng: 0 } } },
   });
   send(message, socket);
@@ -30,20 +31,19 @@ export default function handleWebSocketConnection(socket: WebSocket): void {
     // when a socket connection is "closed", broadcast the "ID"
     const uniqueUserId = ConnectionManager.getUniqueUserId(socket);
     if (uniqueUserId !== undefined) {
+      const storedMessage = messages.get(uniqueUserId);
       const message = createMessage({
         origin: Worldflare.App.Origin.Websocket,
         reason: Worldflare.App.Reason.UserDisconnected,
         wsConnId: uniqueUserId,
         type: Worldflare.App.Type.User,
-        scope: Worldflare.App.Scope.Global,
+        scope: Worldflare.App.Scope.Unknown,
         payload: { data: { coordinates: { lat: 0, lng: 0 } } },
       });
-
-      broadcast(message);
-
-      // remove the message associated with the disconnected connection
+      if (storedMessage !== undefined) {
+        broadcast(message);
+      }
       messages.delete(message.wsConnId);
-      // remove the disconnected connection
       ConnectionManager.removeConnection(socket);
     }
   });
