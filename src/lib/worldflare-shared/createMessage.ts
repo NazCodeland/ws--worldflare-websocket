@@ -6,10 +6,10 @@ import { Worldflare } from './types';
 export function createMessage(
   { origin, reason, wsConnId, type, scope, payload }: Worldflare.App.Message = {
     origin: Worldflare.App.Origin.Websocket,
-    reason: Worldflare.App.Reason.UserConnected,
+    reason: Worldflare.App.Reason.Unknown,
     wsConnId: 0,
-    type: Worldflare.App.Type.User,
-    scope: Worldflare.App.Scope.Global,
+    type: Worldflare.App.Type.Unknown,
+    scope: Worldflare.App.Scope.Unknown,
     payload: { data: { coordinates: { lat: 0, lng: 0 } } },
   },
 ) {
