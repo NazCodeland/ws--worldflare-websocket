@@ -4,7 +4,7 @@ import { createMessage } from './lib/worldflare-shared/createMessage';
 import { Worldflare } from './lib/worldflare-shared/types';
 import { broadcast, send } from './wsUtilities';
 
-let uniqueUserId = 0;
+let uniqueUserId = 1;
 
 export default function handleWebSocketConnection(socket: WebSocket): void {
   console.log('Websocket: Connected to client');
@@ -21,7 +21,7 @@ export default function handleWebSocketConnection(socket: WebSocket): void {
     payload: { data: { coordinates: { lat: 0, lng: 0 } } },
   });
   send(message, socket);
-  console.log('websocket: uniqueUserId sent to client');
+  console.log('websocket: uniqueUserId sent to client, message:', message);
   console.log('');
   uniqueUserId++;
 
