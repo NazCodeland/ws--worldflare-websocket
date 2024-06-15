@@ -6,8 +6,8 @@ export namespace Worldflare {
     export enum Origin {
       Unknown, // 0
       Reserved, // 1
-      Websocket, // 2
-      Client, // 3
+      Client, // 2
+      Websocket, // 3
     }
     export enum Reason {
       Unknown,

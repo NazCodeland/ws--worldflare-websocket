@@ -9,8 +9,6 @@ export default function handleUserEvents(message: Worldflare.App.Message): void 
     console.log('msg', JSON.stringify(message));
     console.log(`----------------------------------------------------`);
 
-    message.origin = Worldflare.App.Origin.Websocket;
-
     broadcast(message, true);
   }
 }

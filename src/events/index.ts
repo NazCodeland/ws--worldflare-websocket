@@ -7,6 +7,8 @@ import { messages } from '$src/lib/stores/messages';
 export default function handleAllEvents(socket: WebSocket) {
   socket.on('message', function (rawMessage: ArrayBufferLike) {
     const decodedMessage = decode(new Uint8Array(rawMessage));
+
+    // if wsConnId exists update the message, otherwise create a new message
     messages.set(decodedMessage.wsConnId, decodedMessage);
 
     switch (decodedMessage.type) {
