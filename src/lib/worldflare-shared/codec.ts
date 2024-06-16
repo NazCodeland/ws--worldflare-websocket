@@ -1,4 +1,4 @@
-import { createMessage } from './createMessage';
+import { createWebSocketMessage } from './createWebSocketMessage';
 import { Worldflare } from './types';
 
 // TODO: future optimization: the addFloat64 uses up 8 bytes of memory
@@ -70,7 +70,7 @@ export function encode({ origin, reason, wsConnId, type, scope, payload }: World
 // deserialize
 export function decode(bytes: Uint8Array) {
   const r = new Uint8ArrayReader(bytes);
-  const message: Worldflare.App.Message = createMessage({
+  const message: Worldflare.App.Message = createWebSocketMessage({
     origin: r.getByte(),
     reason: r.getByte(),
     type: r.getByte(),

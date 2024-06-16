@@ -3,7 +3,7 @@ import { Worldflare } from './types';
 // since all the fields of this function are needed, there doesn't
 // seem to be that of a utility for it right now, other than, a centralized
 // place where this message object is created (this object is used in a lot places)
-export function createMessage(
+export function createWebSocketMessage(
   { origin, reason, wsConnId, type, scope, payload }: Worldflare.App.Message = {
     origin: Worldflare.App.Origin.Websocket,
     reason: Worldflare.App.Reason.Unknown,

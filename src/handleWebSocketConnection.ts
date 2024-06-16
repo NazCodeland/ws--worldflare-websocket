@@ -1,6 +1,6 @@
 import { ConnectionManager } from './lib/stores/connectionManager';
 import { messages } from './lib/stores/messages';
-import { createMessage } from './lib/worldflare-shared/createMessage';
+import { createWebSocketMessage } from './lib/worldflare-shared/createWebSocketMessage';
 import { Worldflare } from './lib/worldflare-shared/types';
 import { broadcast, send } from './wsUtilities';
 
@@ -13,7 +13,7 @@ export default function handleWebSocketConnection(socket: WebSocket): void {
   ConnectionManager.addConnection(socket, uniqueUserId);
 
   // send uniqueUserId back to the client
-  const message = createMessage({
+  const message = createWebSocketMessage({
     origin: Worldflare.App.Origin.Websocket,
     reason: Worldflare.App.Reason.UserConnected,
     wsConnId: uniqueUserId,
@@ -32,7 +32,7 @@ export default function handleWebSocketConnection(socket: WebSocket): void {
     const uniqueUserId = ConnectionManager.getUniqueUserId(socket);
     if (uniqueUserId !== undefined) {
       const storedMessage = messages.get(uniqueUserId);
-      const message = createMessage({
+      const message = createWebSocketMessage({
         origin: Worldflare.App.Origin.Websocket,
         reason: Worldflare.App.Reason.UserDisconnected,
         wsConnId: uniqueUserId,
