@@ -1,36 +1,36 @@
 // a map of all the connected users connected to the WebSocket Server.
-// the 'key' value represents the socket connection and the 'value' represents the unique ID
+// the 'key' value represents the socket connection and the 'value' represents the unique wsConnId
 
 export class ConnectionManager {
-  private static socketToUniqueUserId = new Map<WebSocket, number>();
-  private static uniqueUserIdToSocket = new Map<number, WebSocket>();
+  private static socketToWsConnId = new Map<WebSocket, number>();
+  private static wsConnIdToSocket = new Map<number, WebSocket>();
 
-  static addConnection(socket: WebSocket, uniqueUserId: number) {
-    this.socketToUniqueUserId.set(socket, uniqueUserId);
-    this.uniqueUserIdToSocket.set(uniqueUserId, socket);
+  static addConnection(socket: WebSocket, wsConnId: number) {
+    this.socketToWsConnId.set(socket, wsConnId);
+    this.wsConnIdToSocket.set(wsConnId, socket);
   }
 
   static removeConnection(socket: WebSocket) {
-    const uniqueUserId = this.socketToUniqueUserId.get(socket);
-    this.socketToUniqueUserId.delete(socket);
-    if (uniqueUserId) {
-      this.uniqueUserIdToSocket.delete(uniqueUserId);
+    const wsConnId = this.socketToWsConnId.get(socket);
+    this.socketToWsConnId.delete(socket);
+    if (wsConnId) {
+      this.wsConnIdToSocket.delete(wsConnId);
     }
   }
 
-  static getSocket(uniqueUserId: number): WebSocket | undefined {
-    return this.uniqueUserIdToSocket.get(uniqueUserId);
+  static getSocket(wsConnId: number): WebSocket | undefined {
+    return this.wsConnIdToSocket.get(wsConnId);
   }
 
-  static getUniqueUserId(socket: WebSocket): number | undefined {
-    return this.socketToUniqueUserId.get(socket);
+  static getWsConnId(socket: WebSocket): number | undefined {
+    return this.socketToWsConnId.get(socket);
   }
 
-  static forEachUniqueUserId(callback: (uniqueUserId: number, socket: WebSocket) => void) {
-    this.socketToUniqueUserId.forEach(callback);
+  static forEachWsConnId(callback: (wsConnId: number, socket: WebSocket) => void) {
+    this.socketToWsConnId.forEach(callback);
   }
 
-  static forEachSocket(callback: (socket: WebSocket, uniqueUserId: number) => void) {
-    this.uniqueUserIdToSocket.forEach(callback);
+  static forEachSocket(callback: (socket: WebSocket, wsConnId: number) => void) {
+    this.wsConnIdToSocket.forEach(callback);
   }
 }

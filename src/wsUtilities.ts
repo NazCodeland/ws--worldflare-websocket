@@ -15,17 +15,17 @@ export function send(message: Worldflare.App.Message, socket: WebSocket) {
 
 export function broadcast(message: Worldflare.App.Message, newConnection: boolean = false) {
   function broadcastNewUserMessage() {
-    ConnectionManager.forEachUniqueUserId((uniqueUserId, socket) => {
+    ConnectionManager.forEachWsConnId((wsConnId, socket) => {
       // broadcast the new client's message to all other connected clients
-      if (message.wsConnId !== uniqueUserId) {
-        console.log('broadcasting message to:', uniqueUserId);
+      if (message.wsConnId !== wsConnId) {
+        console.log('broadcasting message to:', wsConnId);
         send(message, socket);
       } else {
         console.log(
           'skipping broadcast to current sender: uniqueId:',
           message.wsConnId,
           'wsConnId',
-          uniqueUserId,
+          wsConnId,
         );
       }
     });
