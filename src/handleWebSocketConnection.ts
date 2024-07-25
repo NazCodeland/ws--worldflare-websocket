@@ -1,6 +1,5 @@
 import { ConnectionManager } from './lib/stores/connectionManager';
 import { messages } from './lib/stores/messages';
-import { createWebSocketMessage } from './lib/worldflare-shared/createWebSocketMessage';
 import { Worldflare } from './lib/worldflare-shared/types';
 import { broadcast, send } from './wsUtilities';
 
@@ -14,14 +13,14 @@ export default function handleWebSocketConnection(socket: WebSocket): void {
   ConnectionManager.addConnection(socket, wsConnId);
 
   // send wsConnId back to the client
-  const message = createWebSocketMessage({
+  const message: Worldflare.App.BaseWsMessage = {
     origin: Worldflare.App.Origin.Websocket,
     reason: Worldflare.App.Reason.UserConnected,
     wsConnId: wsConnId,
     type: Worldflare.App.Type.User,
     scope: Worldflare.App.Scope.Unknown,
     payload: { data: { coordinates: { lat: 0, lng: 0 } } },
-  });
+  };
   send(message, socket);
   console.log('websocket: wsConnId sent to client, message:', message);
   console.log('');
@@ -33,14 +32,14 @@ export default function handleWebSocketConnection(socket: WebSocket): void {
     const wsConnId = ConnectionManager.getWsConnId(socket);
     if (wsConnId !== undefined) {
       const storedMessage = messages.get(wsConnId);
-      const message = createWebSocketMessage({
+      const message: Worldflare.App.BaseWsMessage = {
         origin: Worldflare.App.Origin.Websocket,
         reason: Worldflare.App.Reason.UserDisconnected,
         wsConnId: wsConnId,
         type: Worldflare.App.Type.User,
         scope: Worldflare.App.Scope.Unknown,
         payload: { data: { coordinates: { lat: 0, lng: 0 } } },
-      });
+      };
       if (storedMessage !== undefined) {
         broadcast(message);
       }

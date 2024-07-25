@@ -4,7 +4,7 @@ import { messages } from './lib/stores/messages.js';
 import { ConnectionManager } from './lib/stores/connectionManager.js';
 import { Worldflare } from './lib/worldflare-shared/types.js';
 
-export function send(message: Worldflare.App.Message, socket: WebSocket) {
+export function send(message: Worldflare.App.BaseWsMessage, socket: WebSocket) {
   message.origin = Worldflare.App.Origin.Websocket;
   try {
     socket.send(encode(message));
@@ -13,7 +13,11 @@ export function send(message: Worldflare.App.Message, socket: WebSocket) {
   }
 }
 
-export function broadcast(message: Worldflare.App.Message, newConnection: boolean = false) {
+export function broadcast(message: Worldflare.App.BaseWsMessage, newConnection: boolean = false) {
+  function broadcasToMatchingScope() {
+    const matchingScopedSockets = ConnectionManager.scopeToSockets.get(message.scope)
+  }
+
   function broadcastNewUserMessage() {
     ConnectionManager.forEachWsConnId((wsConnId, socket) => {
       // broadcast the new client's message to all other connected clients

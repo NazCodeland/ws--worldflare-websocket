@@ -1,4 +1,3 @@
-import { createWebSocketMessage } from './createWebSocketMessage';
 import { Worldflare } from './types';
 
 // TODO: future optimization: the addFloat64 uses up 8 bytes of memory
@@ -52,7 +51,7 @@ class Uint8ArrayReader {
 }
 
 // serialize
-export function encode({ origin, reason, wsConnId, type, scope, payload }: Worldflare.App.Message) {
+export function encode({ origin, reason, wsConnId, type, scope, payload }: Worldflare.App.BaseWsMessage) {
   const bytes = new Uint8Array(256);
   const w = new Uint8ArrayWriter(bytes);
   w.addByte(origin);
@@ -70,7 +69,7 @@ export function encode({ origin, reason, wsConnId, type, scope, payload }: World
 // deserialize
 export function decode(bytes: Uint8Array) {
   const r = new Uint8ArrayReader(bytes);
-  const message: Worldflare.App.Message = createWebSocketMessage({
+  const message: Worldflare.App.BaseWsMessage = {
     origin: r.getByte(),
     reason: r.getByte(),
     type: r.getByte(),
@@ -83,6 +82,6 @@ export function decode(bytes: Uint8Array) {
         coordinates: { lat: r.getFloat32(), lng: r.getFloat32() },
       },
     },
-  });
+  };
   return message;
 }

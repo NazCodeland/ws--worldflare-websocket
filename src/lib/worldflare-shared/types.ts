@@ -43,7 +43,7 @@ export namespace Worldflare {
       lng: number;
     }
 
-    export interface Message {
+    export interface BaseWsMessage {
       origin: Origin;
       reason: Reason;
       wsConnId: number;
