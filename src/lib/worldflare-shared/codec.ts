@@ -85,3 +85,35 @@ export function decode(bytes: Uint8Array) {
   };
   return message;
 }
+
+
+interface Person {
+  name: string;
+  age: number;
+  greet: () => string;
+}
+
+function example<T extends Person>(arr: T[]): T[] {
+  return arr;
+}
+
+// Usage
+const people = [
+  {
+    name: 'John',
+    age: 30,
+    greet: () => 'Hello, I am John'
+  },
+  {
+    name: 'Jane',
+    age: 25,
+    greet: () => 'Hello, I am Jane',
+  }
+];
+
+const result = example(people);
+
+// Output the names of the people in the result array
+for (const person of result) {
+  console.log(person.name);
+}

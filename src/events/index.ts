@@ -8,15 +8,15 @@ export default function handleAllEvents(socket: WebSocket) {
   socket.on('message', function (rawMessage: ArrayBufferLike) {
     const decodedMessage = decode(new Uint8Array(rawMessage));
 
-    // if wsConnId exists update the message, otherwise create a new message
+    // updates the message if it exists, otherwise creates a new message
     messages.set(decodedMessage.wsConnId, decodedMessage);
 
     switch (decodedMessage.type) {
-      case Worldflare.App.Type.User: // user
+      case Worldflare.App.Type.User:
         handleUserEvents(decodedMessage);
         break;
 
-      case Worldflare.App.Type.Npc: // npc
+      case Worldflare.App.Type.Npc:
         // handleNpcEvents(socket);
         break;
 

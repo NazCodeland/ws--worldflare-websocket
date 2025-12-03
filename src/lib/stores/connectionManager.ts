@@ -15,7 +15,6 @@ import { Worldflare } from "../worldflare-shared/types";
 // 9.
 // 10.
 
-
 export class ConnectionManager {
   private static socketToWsConnId = new Map<WebSocket, number>();
   private static wsConnIdToSocket = new Map<number, WebSocket>();
@@ -26,7 +25,7 @@ export class ConnectionManager {
     this.socketToWsConnId.set(socket, wsConnId);
     this.wsConnIdToSocket.set(wsConnId, socket);
 
-    const scopedSocketSet = this.scopeToSockets.get(scope)
+    const scopedSocketSet = this.scopeToSockets.get(scope);
     scopedSocketSet ? scopedSocketSet.add(socket) : this.scopeToSockets.set(scope, new Set([socket]));
   }
 

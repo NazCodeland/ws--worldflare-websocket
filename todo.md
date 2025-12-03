@@ -1,0 +1,4 @@
+- [] rename store to state throughout whole app
+- [] migrate to svelte 5
+- [] remove bun runtime api's  if any exist
+- [] hook up convex for database
